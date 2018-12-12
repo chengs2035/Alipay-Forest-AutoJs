@@ -6,6 +6,7 @@
  * @date： 2018-9-14 12:33:56
  * @modify:djc8.cn 支持新版支付宝
  * @modify:djc8.cn 支持新版支付宝 20181210
+ * @modify:djc8.cn 支持新版支付宝 20181212
  */
 var myEnergeType = ["test","收集能量"];
 var morningTime = "07:03"; //自己运动能量生成时间
@@ -80,7 +81,7 @@ function enterRank() {
     }
 }
 /**
- * 判断是否好有排行榜已经结束
+ * 判断是否好友排行榜已经结束
  * @returns {boolean}
  */
 function isRankEnd() {
@@ -152,16 +153,16 @@ function enterOthers() {
             click(ePoint.x/2, ePoint.y + 20);
             tLog("点击的位置为："+ePoint.x/2+":"+(ePoint.y+20));
             waitPage(1);
-            ///(\s*这个没啥用的东西没有用噢\S*$)|(\s*收集能量\S*$)|(\s*线下支付\S*$)|(\s*行走\S*$)|(\s*共享单车\S*$)|(\s*地铁购票\S*$)|(\s*网络购票\S*$)|(\s*网购火车票\S*$)|(\s*生活缴费\S*$)|(\s*ETC缴费\S*$)|(\s*电子发票\S*$)|(\s*绿色办公\S*$)|(\s*咸鱼交易\S*$)|(\s*预约挂号\S*$)/
+            //获取匹配公式
             var energyRegex = generateCollectionType();
-            
+            //匹配获取好友的能量球【数组】
             if (descMatches(energyRegex).exists()) {
                 //这里存在一定的问题：如果sleep时间短的话，就会出现循环代码在运行，循环之后的代码也在运行，感觉出现了异步，具体原因不明
                 descMatches(energyRegex).find().forEach(function(pos) {
                     var posb = pos.bounds();
                     //tLog( posb.centerX());
                     click(posb.centerX(), posb.centerY() - 50);
-                    sleep(2000);
+                    sleep(500);
                 });
             }
             //进去收集完后,递归调用enterOthers
@@ -329,21 +330,6 @@ function unlock() {
         //输入四次 1 （密码为1111）其他密码请自行修改 
         //数字键1的像素坐标为（200,1000）
         click(200, 1000);
-        sleep(300);
-        //3
-        click(700, 1000);
-        sleep(300);
-        //0
-        click(400, 1600);
-        sleep(300);
-        //0
-        click(400, 1600);
-        sleep(300);
-        //4
-        click(200, 1200);
-        sleep(300);
-        //9
-        click(700, 1400);
         sleep(300);
 
     }
