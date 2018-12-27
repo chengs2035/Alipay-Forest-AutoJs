@@ -7,6 +7,7 @@
  * @modify:djc8.cn 支持新版支付宝
  * @modify:djc8.cn 支持新版支付宝 20181210
  * @modify:djc8.cn 支持新版支付宝 20181212
+ * @modify:djc8.cn 支持新版支付宝 20181227
  */
 var myEnergeType = ["test","收集能量"];
 var morningTime = "07:03"; //自己运动能量生成时间
@@ -51,10 +52,10 @@ function waitPage(type) {
     }
     // 等待进入他人的能量主页
     else if (type == 1) {
-        desc("TA收取你").findOne();
+        desc("浇水").findOne();
     }
     //再次容错处理
-    sleep(1000);
+    sleep(3000);
 }
 
 /**
@@ -81,7 +82,7 @@ function enterRank() {
     }
 }
 /**
- * 判断是否好友排行榜已经结束
+ * 判断是否好有排行榜已经结束
  * @returns {boolean}
  */
 function isRankEnd() {
@@ -162,7 +163,7 @@ function enterOthers() {
                     var posb = pos.bounds();
                     //tLog( posb.centerX());
                     click(posb.centerX(), posb.centerY() - 50);
-                    sleep(500);
+                    sleep(2000);
                 });
             }
             //进去收集完后,递归调用enterOthers
@@ -206,6 +207,7 @@ function collectionMyEnergy() {
             tLog("防止小树的提示遮挡,等待中");
             sleep(3000);
         }
+        //id("J_pop_treedialog_close").findOne();
         //这里存在一定的问题：如果sleep时间短的话，就会出现循环代码在运行，循环之后的代码也在运行，感觉出现了异步，具体原因不明
         descMatches(energyRegex).find().forEach(function(pos) {
             var posb = pos.bounds();
